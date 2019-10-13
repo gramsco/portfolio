@@ -1,0 +1,117 @@
+/* https://colorhunt.co/palette/159988 */
+
+*{
+    color:#5b0909;
+}
+body{
+    margin:0;
+}
+
+a{
+    text-decoration: none;
+    color:inherit;
+}
+
+.NavBar{
+    display:flex;
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+    background:#5b0909;
+    color:white;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    height:10vh;
+}
+
+.NavBar > *:hover {
+    transform:scale(1.1);
+    cursor:pointer;
+}
+
+.All{
+    width:100vw;
+    text-align:center;
+    border:3px solid yellow;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom:10vh;
+    background:#ffd369;
+    width:100vw;
+}
+
+.Container{
+    border:1px solid red;
+    width:100%;
+    display:flex;
+    /* flex-direction: column; */
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.Container > *{
+    border:solid 1px green;
+    height:85vh;
+    width:400px;
+
+}
+
+
+
+.Container__Element__Image{
+    height:50%;
+    max-width:100%;
+    max-height:100%;
+}
+
+.Container__Element__Stacks{
+
+    border:2px solid red;
+    height:100px;
+    width:100%;
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.Container__Element__Stacks > * {
+    display:flex;
+    width:80px;
+    height:50px;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgba(0,0,0,0);
+}
+
+.Container__Element__Stacks > *:hover{
+ cursor:pointer;
+ transform:scale(1.2);
+}
+
+table {
+    border:1px solid black;
+    text-align:center;
+    width:100%;
+}
+
+table > * {
+    border:1px solid black;
+}
+
+table > * > * {
+    border:1px solid black;
+}
+
+table > * > * > * {
+    border:1px solid black;
+}
+
+.active{
+    transform:rotate(90deg);
+}
