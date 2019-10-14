@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+let axios = require("axios");
 
-let sites = require("./sites");
+let websites = require("./sites");
+
+
+
 let logos = {
   react: "fab fa-react",
   js: "fab fa-js-square",
@@ -13,6 +17,34 @@ let logos = {
 export default function Container() {
 
   const [search, setSearch] = useState("");
+  const [sites, setSites] = useState([])
+  console.log(sites)
+  useEffect(() => {
+
+    for (let website of websites) {
+    
+      axios
+        .get(`https://api.github.com/repos/gramsco/${website.github_name}`)
+        .then((res) => {
+          website.github_infos = res.data
+          axios
+            .get(`https://api.github.com/repos/gramsco/${website.github_name}/commits`)
+            .then(res => {
+              website.github_commits = res.data
+              let to_push = sites.concat(website)
+              setSites(to_push)
+            })
+            .catch(err => console.log(err))
+          
+        })
+        .catch(err => console.log(err))
+
+
+    }
+  },[])
+  
+
+  
 
   function filteur(e) {
     return (
@@ -43,6 +75,8 @@ export default function Container() {
                 src={"/imgs/" + e.img}
                 alt={e.name}
               />
+              <div>Last updated : {e.github_infos.updated_at}</div>
+              <div>Commits :  {e.github_commits.length}</div>
               <hr />
               <div className="Container__Element__Stacks">
                 {e.techs.map((e, i) => (
