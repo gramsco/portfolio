@@ -1,50 +1,53 @@
 import React, { useState, useEffect } from "react";
 let axios = require("axios");
 
-let websites = require("./sites");
-
-
-
 let logos = {
   react: "fab fa-react",
   js: "fab fa-js-square",
-  javascript:"fab fa-js-square",
+  javascript: "fab fa-js-square",
   html: "fab fa-html5",
   node: "fab fa-node",
   css: "fab fa-css3-alt"
 };
 
 export default function Container() {
+  let websites = require("./sites");
+  console.log(websites);
 
   const [search, setSearch] = useState("");
-  const [sites, setSites] = useState([])
-  console.log(sites)
+  const [sites, setSites] = useState([]);
+  const [counter, setCounter] = useState(0);
+  const [loading,setLoading] = useState(false)
+  console.log(sites);
+
   useEffect(() => {
-
-    for (let website of websites) {
-    
+    console.log(counter < websites.length);
+    console.log("yolo");
+    if (counter === websites.length) setLoading(false)
+      if (counter < websites.length) {
+      setLoading(true)
       axios
-        .get(`https://api.github.com/repos/gramsco/${website.github_name}`)
-        .then((res) => {
-          website.github_infos = res.data
+        .get(
+          `https://api.github.com/repos/gramsco/${websites[counter].github_name}`
+        )
+        .then(res => {
+          websites[counter].github_infos = res.data;
           axios
-            .get(`https://api.github.com/repos/gramsco/${website.github_name}/commits`)
+            .get(
+              `https://api.github.com/repos/gramsco/${websites[counter].github_name}/commits`
+            )
             .then(res => {
-              website.github_commits = res.data
-              let to_push = sites.concat(website)
-              setSites(to_push)
+              websites[counter].github_commits = res.data;
+              setSites([...sites, websites[counter]]);
+              setCounter(counter + 1);
             })
-            .catch(err => console.log(err))
-          
+            .catch(err => console.log(err));
         })
-        .catch(err => console.log(err))
-
-
+        .catch(err => console.log(err));
     }
-  },[])
-  
+  }, [counter]);
 
-  
+  let filteredSites = sites.filter(filteur).sort(sortByDate);
 
   function filteur(e) {
     return (
@@ -52,6 +55,10 @@ export default function Container() {
       e.year === Number(search) ||
       e.keywords.includes(search.toLowerCase())
     );
+  }
+
+  function sortByDate(a, b) {
+    if (b.github_infos.updated_at < a.github_infos.updated_at) return -1;
   }
 
   return (
@@ -65,18 +72,30 @@ export default function Container() {
         />
         <span>{" " + sites.filter(filteur).length + " result(s)"}</span>
       </div>
+      {loading && "loading..."}
       <div className="Container">
         {sites &&
-          sites.filter(filteur).map((e, i) => (
+          filteredSites.map(e => (
             <div className="Container__Element">
-              <h1 key={i}>{e.name}</h1>
+              <h1 key={e.id}>{e.name}</h1>
               <img
                 className="Container__Element__Image"
                 src={"/imgs/" + e.img}
                 alt={e.name}
               />
-              <div>Last updated : {e.github_infos.updated_at}</div>
-              <div>Commits :  {e.github_commits.length}</div>
+              <div className="Github">
+                <div>Last updated : {e.github_infos.updated_at}</div>
+                <div>Commits : {e.github_commits.length}</div>
+                <div>
+                  See more{" "}
+                  <a
+                    href={`http://github.com/gramsco/${e.github_name}`}
+                    target="_blank"
+                  >
+                    <i class="fab fa-github"></i>
+                  </a>
+                </div>
+              </div>
               <hr />
               <div className="Container__Element__Stacks">
                 {e.techs.map((e, i) => (
