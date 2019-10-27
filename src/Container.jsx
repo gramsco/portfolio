@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 let axios = require("axios");
 
+//dictionnaire des logos 
+
 let logos = {
   react: "fab fa-react",
   js: "fab fa-js-square",
@@ -34,10 +36,12 @@ export default function Container() {
           websites[counter].github_infos = res.data;
           axios
             .get(
-              `https://api.github.com/repos/gramsco/${websites[counter].github_name}/commits`
+              `https://api.github.com/repos/gramsco/${websites[counter].github_name}/stats/contributors`
             )
             .then(res => {
-              websites[counter].github_commits = res.data;
+              res = res.data.filter((e) => e.author.login === "gramsco")[0].total
+              console.log(res)
+              websites[counter].github_commits = res;
               setSites([...sites, websites[counter]]);
               setCounter(counter + 1);
             })
@@ -70,33 +74,44 @@ export default function Container() {
           value={search}
           onChange={e => setSearch(e.target.value)}
         />
-        <span>{" " + sites.filter(filteur).length + " result(s)"}</span>
+        <span>
+          {(loading && "Loading infos from github...") ||
+            " " + sites.filter(filteur).length + " result(s)"}
+        </span>
       </div>
-      {loading && "loading..."}
       <div className="Container">
         {sites &&
           filteredSites.map(e => (
             <div className="Container__Element">
-              <h1 key={e.id}>{e.name}</h1>
               <img
                 className="Container__Element__Image"
                 src={"/imgs/" + e.img}
                 alt={e.name}
               />
+              <h1 key={e.id}>{e.name}</h1>
+              <div className="Container__Element__Resume">{e.resume || e.github_infos.description}</div>
+
               <div className="Github">
                 <div>Last updated : {e.github_infos.updated_at}</div>
-                <div>Commits : {e.github_commits.length}</div>
+                <div>Personal commits : {e.github_commits}</div>
                 <div>
-                  See more{" "}
                   <a
                     href={`http://github.com/gramsco/${e.github_name}`}
                     target="_blank"
                   >
-                    <i class="fab fa-github"></i>
+                    See the code <i class="fab fa-github"></i>
                   </a>
+                  {e.github_infos.homepage && (
+                    <a
+                      href={`http://github.com/gramsco/${e.github_infos.homepage}`}
+                      target="_blank"
+                    >
+                      {" "}
+                      See the result <i class="fas fa-grimace"></i>
+                    </a>
+                  )}
                 </div>
               </div>
-              <hr />
               <div className="Container__Element__Stacks">
                 {e.techs.map((e, i) => (
                   <span style={{ fontSize: "20px" }}>
@@ -105,8 +120,6 @@ export default function Container() {
                   </span>
                 ))}
               </div>
-              <div>{e.resume}</div>
-              <hr />
             </div>
           ))}
       </div>
