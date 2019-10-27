@@ -6,6 +6,7 @@
 *{
     color:white;
     font-family: 'Dosis', sans-serif;
+    box-sizing: border-box;
 
 }
 
@@ -64,20 +65,41 @@ a{
     width:100vw;
 }
 
+.All_Header{
+    border:var(--var-links) 1px solid;
+    width:100%;
+    position:fixed;
+    top:0;
+    height:12vh;
+    background:var(--var-dark);
+}
+
 .Container{
     width:100%;
     display:flex;
-    /* flex-direction: column; */
     justify-content: space-around;
     align-items: center;
     flex-wrap: wrap;
+    margin-top:12vh;
 }
 
 .Container > *{
+    height:auto;
     height:85vh;
     width:400px;
-
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
 }
+
+.Container__Element__Title{
+    border-top:#d62196 4px solid;
+    border-left:#d62196 4px solid;
+    align-self: flex-start;
+    width:100px;
+}
+
 
 
 .Container__Element__Resume{
@@ -90,7 +112,8 @@ a{
 }
 
 .Container__Element__Image{
-    height:50%;
+    height:200px;
+    width:200px;
     max-width:100%;
     max-height:100%;
 }
@@ -103,7 +126,8 @@ a{
     justify-content: space-around;
     align-items: center;
     flex-wrap: wrap;
-    border:red 1px solid;
+    border:#d62196 2px solid;
+    border-radius: 12px;
     overflow: scroll;
 }
 
@@ -125,6 +149,20 @@ table {
     width:100%;
 }
 
+
+/* .Container__Border__Bottom__Container{
+    display:flex;
+    justify-content: flex-end;
+    align-content: flex-end;
+    border:1px white solid;
+} */
+
+.Container__Border__Bottom{
+    height:5vw;
+    width:50vw;
+    /* border-right:#d62196 4px solid; */
+    /* align-self: flex-end; */
+}
 
 
 .active{

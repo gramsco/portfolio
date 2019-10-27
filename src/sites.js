@@ -61,6 +61,21 @@ let sites = [
         responsive: true,
         year: 2019,
         id: 3,
+    },
+    {
+        name: "Donkey Island",
+        github_name: "donkeyisland",
+        github_infos: {},
+        github_commits: [],
+        img: "donkey.png",
+        techs: ["javascript", "html", "css"],
+        keywords: ["jeu","game","donkey","lama"],
+        resume: "A Vanilla JS game. Play Joker the donkey to find all the carrots!",
+        front: true,
+        back: false,
+        responsive: true,
+        year: 2019,
+        id: 3,
     }
     
 

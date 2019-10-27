@@ -22,6 +22,8 @@ export default function Container() {
   const [loading,setLoading] = useState(false)
   console.log(sites);
 
+  
+  
   useEffect(() => {
     console.log(counter < websites.length);
     console.log("yolo");
@@ -65,10 +67,11 @@ export default function Container() {
     if (b.github_infos.updated_at < a.github_infos.updated_at) return -1;
   }
 
+
   return (
     <div className="All">
-      <div>
-        <h1>Many things!</h1>
+      <div className="All_Header">
+        <h1>Some projects of mine!</h1>
         <input
           placeholder="search by name, tech, year..."
           value={search}
@@ -83,17 +86,21 @@ export default function Container() {
         {sites &&
           filteredSites.map(e => (
             <div className="Container__Element">
+              <h2 className="Container__Element__Title" key={e.id}>
+                {e.name}
+              </h2>
               <img
                 className="Container__Element__Image"
                 src={"/imgs/" + e.img}
                 alt={e.name}
               />
-              <h1 key={e.id}>{e.name}</h1>
-              <div className="Container__Element__Resume">{e.resume || e.github_infos.description}</div>
+              <div className="Container__Element__Resume">
+                {e.resume || e.github_infos.description}
+              </div>
 
               <div className="Github">
                 <div>Last updated : {e.github_infos.updated_at}</div>
-                <div>Personal commits : {e.github_commits}</div>
+                <div>My commits on this project : {e.github_commits}</div>
                 <div>
                   <a
                     href={`http://github.com/gramsco/${e.github_name}`}
@@ -120,6 +127,9 @@ export default function Container() {
                   </span>
                 ))}
               </div>
+              {/* <div className="Container__Border__Bottom__Container"> */}
+                <div className="Container__Border__Bottom"></div>
+              {/* </div> */}
             </div>
           ))}
       </div>
