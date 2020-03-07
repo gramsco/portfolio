@@ -53,4 +53,4 @@ let style = {
     padding: '2%',
 };
 
-Object.assign(helper.style, style);
+Object.assign(helper.style, style)
