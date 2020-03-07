@@ -12,11 +12,7 @@ function App() {
 
   return (
     <div className="App">
-      <NavBar />
-      <Switch>
-        <Route exact path="/projects" component={Container}/>
-        <Route exact path="/" component={About}/>
-      </Switch>
+        not much to see, eh?      
     </div>
   );
 }

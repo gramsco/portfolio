@@ -4,10 +4,10 @@
 
 
 *{
-    color:white;
     font-family: 'Dosis', sans-serif;
     box-sizing: border-box;
-
+    margin:0;
+    padding:0;
 }
 
 h1,h2,h3,h4{
@@ -15,14 +15,29 @@ h1,h2,h3,h4{
     margin:0;
 }
 
-:root{
-    --var-dark:#380e7f;
-    --var-less-dark:#6915cf;
-    --var-font:#d62196;
-    --var-links:#e497cd;
-
-
+.About__Header{
+    background:black;
+    display:flex;
+    justify-content: center;
+    width:100%;
+    height:100vh;
 }
+
+.About__Header img{
+    width:auto;
+    height:300px;
+}
+
+
+
+:root{
+    --var-dark:#6c5ce7;
+    --var-less-dark:#7b88ff;
+    --var-font:#fdcb6e;
+    --var-links:#fff3b1;
+}
+
+
 
 
 body{
@@ -61,17 +76,20 @@ a{
     align-items: center;
     justify-content: center;
     margin-bottom:10vh;
-    background:var(--var-less-dark);
+    background:var(--var-links);
+    background:white;
     width:100vw;
+    color:var(--var-dark);
 }
 
 .All_Header{
-    border:var(--var-links) 1px solid;
+    /* border:var(--var-links) 5px solid; */
     width:100%;
     position:fixed;
     top:0;
     height:12vh;
     background:var(--var-dark);
+    color:var(--var-links);
 }
 
 .Container{
@@ -84,31 +102,41 @@ a{
 }
 
 .Container > *{
-    height:auto;
-    height:85vh;
+    height:75vh;
     width:400px;
     display:flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
+}
+
+.Container > *:hover{
+    background:rgba(0,0,0,0.1);
+    border-radius:12px;
+    /* transform:scale(1.01); */
 }
 
 .Container__Element__Title{
     border-top:#d62196 4px solid;
     border-left:#d62196 4px solid;
     align-self: flex-start;
-    width:100px;
+    width:100px; 
+    /* color:var(--var-font); */
+    /* background: var(--var-dark); */
+
 }
 
 
 
 .Container__Element__Resume{
+    background:var(--var-dark);
     color:var(--var-links);
     height:10%;
     display:flex;
     justify-content: center;
     align-items:center;
     flex-direction: column;
+    padding:5%;
 }
 
 .Container__Element__Image{

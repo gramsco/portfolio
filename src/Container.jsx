@@ -127,9 +127,7 @@ export default function Container() {
                   </span>
                 ))}
               </div>
-              {/* <div className="Container__Border__Bottom__Container"> */}
-                <div className="Container__Border__Bottom"></div>
-              {/* </div> */}
+             
             </div>
           ))}
       </div>
